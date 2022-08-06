@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          FINAL FUCKINLY LMAO
+          yes my fucking g lessssgoooooo
         </a>
       </header>
     </div>

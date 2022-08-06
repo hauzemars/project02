@@ -1,13 +1,13 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Bootcamp Class 2
+name: Deploy Website on Surge
 
-# Controls when the workflow will run
+# Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
-
+    
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -23,35 +23,24 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Installing Node
+      - name: Setup Node.js environment
         uses: actions/setup-node@v2-beta
-        with:
-          node-version: 12
+        with: 
+          version: 12
 
-      - name: Installing yarn
-        uses: Borales/actions-yarn@v2.3.0
+      - name: GitHub Action for Yarn
+        uses: Borales/actions-yarn@v2.1.0
         with:
-          cmd: install
-
+          # Yarn command
+          cmd: install # npm install/ yarn install
 
       - name: Creating build
-        run: sudo yarn build
+        run: yarn build
 
-
-      # Runs a set of commands using the runners shell
-      - name: Installing SURGE
+      - name: installing surge  
         run: npm install -g surge
         
       - name: Deploy to Surge
         run: surge ./build https://projectboot02.surge.sh --token ${{ secrets.SURGE_TOKEN }}
           
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
